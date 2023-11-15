@@ -1,11 +1,12 @@
 import asyncio
 import time
+from pathlib import Path
 from random import random
 
 import edge_tts
 import ffmpeg
-import ffprobe
 import pysubs2
+import ffprobe
 
 TEXT = '''
 
@@ -61,6 +62,8 @@ def time_stamp(seconds):
 if __name__ == "__main__":
     print("Starting TextToVideo")
     loop = asyncio.get_event_loop_policy().get_event_loop()
+    Path("temp").mkdir(exist_ok=True)
+    Path("output").mkdir(exist_ok=True)
     try:
         loop.run_until_complete(audio())
         loop.run_until_complete(combine())
